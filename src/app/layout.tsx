@@ -1,26 +1,27 @@
 import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({subsets: ['latin']});
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-});
+import { Providers } from '@/app/providers';
+import { jakarta } from '@/app/fonts';
+import AppNavbar from '@/components/Navbar';
 
 export const metadata: Metadata = {
-  title: 'Vila Diana',
+  title: 'Vila Diana | Cazare Poiana Brasov',
   description: 'Poiana Brasov',
 };
 
 export default function RootLayout({
-                                     children,
-                                   }: {
-  children: React.ReactNode
+  children,
+}: {
+  children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-    <body className={`${poppins.className} antialiased`}>{children}</body>
+    <html lang="en">
+      <body className={`${jakarta.className} antialiased`}>
+        <Providers>
+          <AppNavbar />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

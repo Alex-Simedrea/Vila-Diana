@@ -38,8 +38,9 @@ export default function Page() {
         router.push('/admin');
         console.log(userCredential);
       })
-      .catch(() => {
+      .catch((err) => {
         alert('Email or password incorrect!');
+        console.log(JSON.stringify(err));
       });
   };
 
