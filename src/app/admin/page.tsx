@@ -121,7 +121,6 @@ export default function Page() {
 
   return (
     <>
-      <AppNavbar />
       <h1 className={`ml-8 mt-5 text-5xl font-semibold ${poppins.className}`}>
         Admin
       </h1>

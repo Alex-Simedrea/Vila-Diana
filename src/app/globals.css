@@ -12,3 +12,54 @@ body {
   color: rgb(var(--foreground-rgb));
   background: #fff;
 }
+
+a {
+  outline: none;
+}
+
+swiper-container {
+  width: 100%;
+  height: 100%;
+  /*margin-right: 3rem;*/
+}
+
+swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide img {
+  display: block;
+  /*width: 100px;*/
+  /*height: 100px;*/
+  width: 100%;
+  height: 100%;
+  /*object-fit: cover;*/
+}
+
+swiper-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+swiper-container::part(bullet-active) {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+swiper-container::part(button-prev) {
+  display: none;
+  /*width: 1rem;*/
+  /*color: white;*/
+}
+
+swiper-container::part(button-next) {
+  display: none;
+  /*width: 1rem;*/
+  /*color: white;*/
+}
