@@ -30,8 +30,8 @@ export default function Terms() {
           <br />
           Acest Acord stabileste folosirea de catre dumneavoastra a site-ului de
           Internet localizat la adresa www.vila-diana.com (denumit &icirc;n
-          continuare "Site-ul") si se constituie &icirc;ntre SC Attractive Star
-          SRL (denumita &icirc;n continuare "al nostru", "noua", sau "noi") si
+          continuare &quot;Site-ul&quot;) si se constituie &icirc;ntre SC Attractive Star
+          SRL (denumita &icirc;n continuare &quot;al nostru&quot;, &quot;noua&quot;, sau &quot;noi&quot;) si
           dumneavoastra, action&acirc;nd din partea dumneavoastra sau a unui
           cumparator, membru sau furnizor &icirc;n numele caruia v-ati
           &icirc;nregistrat (denumit &icirc;n continuare
