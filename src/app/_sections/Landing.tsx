@@ -34,9 +34,11 @@ export default function Landing() {
             <i className='fa-regular fa-arrow-up-right'></i>
           </Button>
           <Button
+            as={Link}
             size='lg'
             radius='full'
             className='flex-grow border border-black bg-white'
+            href='/about'
           >
             Vezi mai multe despre noi
           </Button>
@@ -149,9 +151,11 @@ export default function Landing() {
         </div>
       </div>
       <Button
+        as={Link}
         size='lg'
         radius='full'
         className='mt-4 h-0 flex-grow border border-black bg-white max-md:max-h-10 max-md:min-h-10 md:hidden'
+        href='/about'
       >
         Vezi mai multe despre noi
         <i className='fa fa-arrow-right' />

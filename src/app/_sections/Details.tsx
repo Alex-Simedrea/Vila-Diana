@@ -46,9 +46,11 @@ export default function Details() {
                 <i className='fa-regular fa-arrow-up-right'></i>
               </Button>
               <Button
+                as={Link}
                 size='lg'
                 radius='full'
                 className='bg-white px-10 max-md:w-full'
+                href='/accommodation'
               >
                 Vezi camerele noastre
               </Button>

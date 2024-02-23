@@ -1,13 +1,12 @@
 'use client';
 
-import getGalleryImages, { Image as ImageType } from '@/lib/getFiles';
+import { Image as ImageType } from '@/lib/getFiles';
 import React, { useEffect, useState } from 'react';
 import 'react-photo-view/dist/react-photo-view.css';
 import { poppins } from '@/app/fonts';
 import Footer from '@/components/Footer';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
-import Image from 'next/image';
 import getGalleryPhotos from '@/lib/getPhotosFromFirebase';
 
 export default function GalleryPage() {
@@ -15,13 +14,6 @@ export default function GalleryPage() {
   const [index, setIndex] = useState(-1);
 
   useEffect(() => {
-    // async function fetchImages() {
-    //   return await getGalleryImages();
-    // }
-    //
-    // fetchImages().then((files) => {
-    //   setImages(files as any);
-    // });
     getGalleryPhotos().then((files) => {
       if (files) {
         setImages(files);
@@ -47,7 +39,7 @@ export default function GalleryPage() {
                 onClick={() => {
                   setIndex(index);
                 }}
-                className='w-[400px] h-[400px] object-cover cursor-pointer'
+                className='h-[400px] w-[400px] cursor-pointer object-cover'
               />
             );
           })}

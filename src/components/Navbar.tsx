@@ -51,7 +51,7 @@ export default function AppNavbar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className={'font-semibold'} color='foreground' href='#'>
+          <Link className={'font-semibold'} color='foreground' href='/blog'>
             Blog
           </Link>
         </NavbarItem>
@@ -93,7 +93,7 @@ export default function AppNavbar() {
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link className='w-full' href='#' size='lg'>
+          <Link className='w-full' href='/blog' size='lg'>
             Blog
           </Link>
         </NavbarMenuItem>
