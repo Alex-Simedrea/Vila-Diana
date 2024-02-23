@@ -3,7 +3,6 @@ import './globals.css';
 import { Providers } from '@/app/providers';
 import { jakarta } from '@/app/fonts';
 import AppNavbar from '@/components/Navbar';
-import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Vila Diana | Cazare Poiana Brasov',
@@ -16,14 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={`${jakarta.className} antialiased`}>
-        <Providers>
+        {/*<Providers>*/}
           <AppNavbar />
           {children}
-        </Providers>
+        {/*</Providers>*/}
       </body>
-    <Script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js' />
     </html>
   );
 }

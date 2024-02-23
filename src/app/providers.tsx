@@ -1,12 +1,14 @@
 // app/providers.tsx
-'use client'
+// 'use client';
 
-import {NextUIProvider} from '@nextui-org/react'
+import { NextUIProvider } from '@nextui-org/react';
+import { PhotoProvider } from 'react-photo-view';
 
-export function Providers({children}: { children: React.ReactNode }) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <NextUIProvider>
+    // <NextUIProvider>
       {children}
-    </NextUIProvider>
-  )
+      /*<PhotoProvider maskOpacity={0.7}>{children}</PhotoProvider>*/
+    // </NextUIProvider>
+  );
 }

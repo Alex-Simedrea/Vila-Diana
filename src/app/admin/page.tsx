@@ -12,7 +12,6 @@ import {
   uploadBytes,
   uploadString,
 } from '@firebase/storage';
-import AppNavbar from '@/components/Navbar';
 import { poppins } from '@/app/fonts';
 
 export default function Page() {
@@ -125,13 +124,13 @@ export default function Page() {
         Admin
       </h1>
       <iframe
-        width="400"
-        height="400"
+        width='400'
+        height='400'
         // frameBorder="0"
         // scrolling="no"
         // marginHeight="0"
         // marginWidth="0"
-        src="https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        src='https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed'
       ></iframe>
       <div>
         <p>admin page</p>
@@ -145,13 +144,13 @@ export default function Page() {
           }}
         >
           <input
-            type="file"
-            id="img"
-            name="img"
-            accept="image/*"
+            type='file'
+            id='img'
+            name='img'
+            accept='image/*'
             onChange={handleFileChange}
           />
-          <button type="submit">upload</button>
+          <button type='submit'>upload</button>
         </form>
       </div>
     </>

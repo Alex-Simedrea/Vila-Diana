@@ -40,7 +40,7 @@ export default function Details() {
                 target='_blank'
                 size='lg'
                 radius='full'
-                className='mr-4 bg-primary-800 px-10 text-white max-md:w-full'
+                className='md:mr-4 bg-primary-800 px-10 text-white max-md:w-full'
               >
                 Rezerva acum
                 <i className='fa-regular fa-arrow-up-right'></i>

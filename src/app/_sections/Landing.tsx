@@ -1,6 +1,10 @@
 import { poppins } from '@/app/fonts';
 import { Button, Link } from '@nextui-org/react';
-import Image from 'next/image';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
 
 export default function Landing() {
   return (
@@ -47,7 +51,7 @@ export default function Landing() {
         <div className='flex pb-12 pt-5 max-md:hidden'>
           <div className='align-center flex w-1/3 flex-col justify-center border-r border-r-black pr-6 text-center'>
             <h3 className='mb-2 self-center text-4xl font-bold max-xl:text-3xl max-lg:text-xl'>
-              9
+              7
             </h3>
             <p className='self-center text-lg font-medium leading-tight max-xl:text-medium max-lg:text-sm'>
               camere de cazare
@@ -73,42 +77,37 @@ export default function Landing() {
       </div>
 
       <div className='relative max-md:h-0 max-md:grow md:w-3/5 md:pr-6'>
-        <swiper-container
-          className='mySwiper'
-          pagination='true'
-          pagination-clickable='true'
-          navigation='true'
-          space-between='30'
-          centered-slides='true'
-          autoplay-delay='4000'
-          autoplay-disable-on-interaction='false'
-          loop='true'
-        >
-          <swiper-slide>
-            <img
-              src='/carousel/1.png'
-              alt='carousel1'
-              // fill={true}
-              className='!h-[calc(100%-2rem)] self-start overflow-hidden rounded-large object-cover max-md:rounded-3xl'
-            />
-          </swiper-slide>
-          <swiper-slide>
-            <img
-              src='/carousel/2.png'
-              alt='carousel2'
-              // fill={true}
-              className='!h-[calc(100%-2rem)] self-start overflow-hidden rounded-large object-cover max-md:rounded-3xl'
-            />
-          </swiper-slide>
-          <swiper-slide>
-            <img
-              src='/carousel/3.png'
-              alt='carousel3'
-              // fill={true}
-              className='!h-[calc(100%-2rem)] self-start overflow-hidden rounded-large object-cover max-md:rounded-3xl'
-            />
-          </swiper-slide>
-        </swiper-container>
+        <Carousel className='h-full' autoplay>
+          <CarouselContent className='h-full'>
+            <CarouselItem>
+              <div className='flex h-full w-full items-center justify-center'>
+                <img
+                  src='/carousel/1.png'
+                  alt='carousel1'
+                  className='!h-full w-full self-start overflow-hidden rounded-large object-cover max-md:rounded-3xl'
+                />
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div className='flex h-full w-full items-center justify-center'>
+                <img
+                  src='/carousel/2.png'
+                  alt='carousel2'
+                  className='!h-full w-full self-start overflow-hidden rounded-large object-cover max-md:rounded-3xl'
+                />
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div className='flex h-full w-full items-center justify-center'>
+                <img
+                  src='/carousel/3.png'
+                  alt='carousel3'
+                  className='!h-full w-full self-start overflow-hidden rounded-large object-cover max-md:rounded-3xl'
+                />
+              </div>
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
 
         <div className='absolute right-0 top-0 z-10 max-md:hidden'>
           <div className='flex'>
@@ -130,10 +129,16 @@ export default function Landing() {
           <div className='flex justify-end'>
             <div className='h-[35px] w-[35px] shrink-0 self-start rounded-[0px_20px_0px_0px] shadow-[14px_-17px_0px_3px_#FFF]' />
             <div className='z-10 rounded-bl-md bg-white py-2 pl-4 pr-10 text-[1.5rem]'>
-              <a target='_blank' href='https://www.facebook.com/profile.php?id=100075897819542'>
+              <a
+                target='_blank'
+                href='https://www.facebook.com/profile.php?id=100075897819542'
+              >
                 <i className='fa-brands fa-facebook mr-5' />
               </a>
-              <a target='_blank' href='https://www.instagram.com/vila_diana_poiana_brasov_/'>
+              <a
+                target='_blank'
+                href='https://www.instagram.com/vila_diana_poiana_brasov_/'
+              >
                 <i className='fa-brands fa-instagram' />
               </a>
             </div>
@@ -146,12 +151,11 @@ export default function Landing() {
       <Button
         size='lg'
         radius='full'
-        className='h-0 flex-grow border border-black bg-white max-md:max-h-10 max-md:min-h-10 md:hidden'
+        className='mt-4 h-0 flex-grow border border-black bg-white max-md:max-h-10 max-md:min-h-10 md:hidden'
       >
         Vezi mai multe despre noi
         <i className='fa fa-arrow-right' />
       </Button>
-      {/*<div className='w-[100px] h-[100px] bg-blue-700'></div>*/}
     </section>
   );
 }

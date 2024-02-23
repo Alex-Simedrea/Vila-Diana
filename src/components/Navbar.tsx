@@ -1,29 +1,22 @@
 import {
   Button,
   Link,
+  Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  Navbar,
 } from '@nextui-org/react';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function AppNavbar() {
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems = ['Despre noi', 'Galerie', 'Cazare', 'Blog', 'Contact'];
-
   return (
     <Navbar maxWidth={'full'} className='z-50'>
       <NavbarContent justify='start'>
-        <NavbarMenuToggle
-          // aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          className='sm:hidden'
-        />
+        <NavbarMenuToggle className='sm:hidden' />
         <Link href='/'>
           <NavbarBrand>
             <Image
@@ -31,25 +24,29 @@ export default function AppNavbar() {
               alt={'ceva'}
               width={150}
               height={100}
-              className='w-auto h-auto'
+              className='h-auto w-auto'
             />
           </NavbarBrand>
-          </Link>
+        </Link>
       </NavbarContent>
 
       <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
         <NavbarItem>
-          <Link className={'font-semibold'} color='foreground' href='#'>
+          <Link className={'font-semibold'} color='foreground' href='/about'>
             Despre noi
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className={'font-semibold'} href='#' color={'foreground'}>
+          <Link
+            className={'font-semibold'}
+            href='/gallery'
+            color={'foreground'}
+          >
             Galerie
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className={'font-semibold'} color='foreground' href='#'>
+          <Link className={'font-semibold'} color='foreground' href='/accommodation'>
             Cazare
           </Link>
         </NavbarItem>
@@ -59,7 +56,7 @@ export default function AppNavbar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className={'font-semibold'} color='foreground' href='#'>
+          <Link className={'font-semibold'} color='foreground' href='/contact'>
             Contact
           </Link>
         </NavbarItem>
@@ -68,7 +65,7 @@ export default function AppNavbar() {
         <NavbarItem>
           <Button
             as={Link}
-            className={'bg-secondary-150 font-semibold px-8'}
+            className={'bg-secondary-150 px-8 font-semibold'}
             href='https://vila-diana-9.pynbooking.direct'
             target='_blank'
             variant='flat'
@@ -80,14 +77,32 @@ export default function AppNavbar() {
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className='w-full' href='#' size='lg'>
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+        <NavbarMenuItem>
+          <Link className='w-full' href='/about' size='lg'>
+            Despre noi
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link className='w-full' href='/gallery' size='lg'>
+            Galerie
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link className='w-full' href='/accommodation' size='lg'>
+            Cazare
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link className='w-full' href='#' size='lg'>
+            Blog
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link className='w-full' href='/contact' size='lg'>
+            Contact
+          </Link>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
-);
+  );
 }

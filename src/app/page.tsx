@@ -1,4 +1,5 @@
 import '@/lib/fontawesome/css/fa.css';
+import 'react-photo-view/dist/react-photo-view.css';
 import Footer from '@/components/Footer';
 import Landing from '@/app/_sections/Landing';
 import Details from '@/app/_sections/Details';
