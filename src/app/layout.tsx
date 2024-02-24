@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Providers } from '@/app/providers';
 import { jakarta } from '@/app/fonts';
 import AppNavbar from '@/components/Navbar';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Vila Diana | Cazare Poiana Brasov',
@@ -17,10 +17,20 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${jakarta.className} antialiased`}>
-        {/*<Providers>*/}
-          <AppNavbar />
-          {children}
-        {/*</Providers>*/}
+        <AppNavbar />
+        {children}
+        <Script
+          async
+          src='https://www.googletagmanager.com/gtag/js?id=G-W07EGGHMEJ'
+        ></Script>
+        <Script id='google-aalytics'>
+          {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-W07EGGHMEJ');`}
+        </Script>
       </body>
     </html>
   );
