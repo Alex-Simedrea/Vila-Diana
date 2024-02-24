@@ -39,7 +39,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast, Toaster } from 'sonner';
 import { revalidatePath } from 'next/cache';
-import revalidate from '@/lib/submitForm';
+import revalidate from '@/lib/revalidateCache';
 
 function formattedDate(date: string) {
   const d = new Date(date);
@@ -204,6 +204,7 @@ export default function Page() {
         imageID: `${imageNames?.length}`,
       },
     };
+    data.body = data.body.replace(/\r\n/g, '\n');
     await uploadString(newRef, data.body, 'raw', textMetadata).then(() => {
       console.log('Uploaded a blob or file!');
     });
@@ -292,6 +293,7 @@ export default function Page() {
                   <Button
                     onClick={() =>
                       handlePostDeleteClick(post).then(() => {
+                        revalidate();
                         toast('Postarea a fost ștearsă!', {
                           action: {
                             label: 'Refresh',

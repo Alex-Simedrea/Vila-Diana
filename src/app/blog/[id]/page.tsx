@@ -24,6 +24,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     const url = await getDownloadURL(storageRef);
     const response = await fetch(url);
     postContent = await response.text();
+    postContent = postContent.replace(/\n/g, '<br/>');
 
     metadata = await getMetadata(storageRef);
 
@@ -59,7 +60,9 @@ export default async function Page({ params }: { params: { id: string } }) {
         <label className='flex justify-center pb-6 text-[1.25rem] font-medium'>
           <span className='font-bold'>{title}</span>
         </label>
-        <article className='py-12'>{postContent}</article>
+        <article className='py-12' dangerouslySetInnerHTML={{
+          __html: postContent
+        }}></article>
       </main>
       <Footer />
     </div>
