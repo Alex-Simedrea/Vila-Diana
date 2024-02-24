@@ -38,6 +38,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast, Toaster } from 'sonner';
+import { revalidatePath } from 'next/cache';
 
 function formattedDate(date: string) {
   const d = new Date(date);
@@ -224,6 +225,7 @@ export default function Page() {
       console.log('Uploaded a blob or file!');
     });
 
+    revalidatePath('/blog')
     toast('Postarea a fost adăugată!', {
       action: {
         label: 'Refresh',
