@@ -5,6 +5,8 @@ import app from '../../../firebase';
 import { getAuth, User } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import {
+  deleteObject,
+  getDownloadURL,
   getMetadata,
   getStorage,
   listAll,
@@ -13,17 +15,48 @@ import {
   uploadString,
 } from '@firebase/storage';
 import { poppins } from '@/app/fonts';
+import { Button } from '@nextui-org/react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { toast, Toaster } from 'sonner';
 
-const text =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec sollicitudin purus, vitae sagittis diam. Maecenas a eros urna. Phasellus lobortis pretium lectus, condimentum vestibulum dui. Cras lectus tellus, laoreet a pretium non, imperdiet et nunc. Donec in sagittis mauris, vitae ultrices dui. Sed quis feugiat felis, quis rutrum ipsum. Aliquam maximus, diam in sagittis maximus, velit massa vulputate neque, non eleifend est libero id augue. Aenean quis neque finibus, pretium diam vitae, auctor ex. Ut blandit ut nibh faucibus mattis.\n' +
-  '\n' +
-  'Sed ac velit venenatis, porttitor lectus id, fringilla tortor. Nunc hendrerit malesuada justo. Donec venenatis lacus leo, quis consectetur enim condimentum a. Duis ac sollicitudin elit. Phasellus felis lorem, cursus vitae orci eget, vulputate eleifend ante. Duis mollis faucibus libero at faucibus. Donec molestie odio urna, quis dictum enim eleifend non. Vestibulum posuere euismod leo nec congue. Vivamus finibus sem eu quam vestibulum volutpat. Aliquam viverra mi sit amet imperdiet auctor. Sed fringilla ullamcorper nulla in tristique. Quisque non molestie lorem, ut rhoncus tellus. Mauris ut tortor gravida, fermentum odio at, accumsan tortor. Fusce tristique mi erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus quis augue porta, bibendum tellus et, cursus est.\n' +
-  '\n' +
-  'Mauris commodo ultrices euismod. Aenean bibendum nec nibh in lobortis. Proin nec posuere massa, vitae ultrices felis. Morbi pretium a ex id ultricies. Nullam suscipit dolor risus, a sagittis nisl pellentesque ullamcorper. Integer egestas, purus sit amet ultricies scelerisque, neque urna pulvinar dolor, at mollis est neque sed velit. Vivamus quis quam tincidunt velit gravida efficitur. Donec commodo congue tortor sed vulputate. Donec sed lacinia sem.\n' +
-  '\n' +
-  'Morbi ac mauris consequat, mollis odio eu, varius eros. In id metus ex. Donec eget tristique diam. Aliquam gravida nisl purus, et dignissim purus fermentum sed. Aliquam lobortis lectus ipsum, eget condimentum mi viverra iaculis. Suspendisse id sem vitae ante ullamcorper fermentum. Maecenas nunc massa, mollis egestas est vitae, mattis congue nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras at ligula aliquet, mollis libero vel, aliquet risus. Curabitur pretium sapien non nunc faucibus, ac fermentum dui ullamcorper. Suspendisse congue, tellus ut faucibus aliquam, nisl lorem luctus orci, at imperdiet augue purus molestie leo. Sed a libero feugiat, tempus ligula sit amet, eleifend est. Donec nec ultricies tellus. Suspendisse potenti. Pellentesque ullamcorper nec enim sit amet faucibus. Proin vehicula varius orci id congue.\n' +
-  '\n' +
-  'Nullam ac metus lorem. Pellentesque pellentesque consequat elementum. Curabitur convallis a massa eu ultrices. Vestibulum eget quam id metus viverra dapibus. Nam rhoncus finibus purus et facilisis. Sed semper massa eu accumsan congue. Sed turpis leo, condimentum sed ultricies eleifend, ultrices in quam. Maecenas porta suscipit libero eget varius. Donec vitae justo quis neque pulvinar viverra. Cras condimentum lorem est, sed vestibulum sapien accumsan eget. Ut quis velit posuere, facilisis lorem mattis, auctor sapien. Nulla pretium magna eu magna rhoncus aliquet. Nulla egestas volutpat viverra.';
+function formattedDate(date: string) {
+  const d = new Date(date);
+  return d.toLocaleDateString('ro-RO');
+}
+
+const schema = yup
+  .object({
+    title: yup.string().required(),
+    body: yup.string().required(),
+    file: yup.mixed(),
+  })
+  .required();
+
+interface IFormValues {
+  title: string;
+  body: string;
+  file?: any;
+}
 
 export default function Page() {
   const firebaseAuth = getAuth(app);
@@ -33,7 +66,13 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [postNames, setPostNames] = useState<any[]>();
   const [imageNames, setImageNames] = useState<any[]>();
+  const [galleryPhotos, setGalleryPhotos] = useState<any[]>();
   const [file, setFile] = useState<File>();
+  const [galleryFile, setGalleryFile] = useState<File>();
+  const form = useForm<IFormValues>({
+    mode: 'onBlur',
+    resolver: yupResolver(schema),
+  });
 
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
@@ -88,11 +127,50 @@ export default function Page() {
       .catch((error) => {
         console.error('Error listing files', error);
       });
+
+    const galleryPhotosRef = ref(storage, 'gallery');
+    listAll(galleryPhotosRef)
+      .then(async (res) => {
+        const promises = res.items.map(async (item) => {
+          const metadata = await getMetadata(item);
+          const url = await getDownloadURL(item);
+          return {
+            name: item.name,
+            metadata: metadata,
+            src: url,
+          };
+        });
+
+        Promise.all(promises).then((filesWithMetadata) => {
+          setGalleryPhotos(filesWithMetadata);
+        });
+      })
+      .catch((error) => {
+        console.error('Error listing files', error);
+      });
   }, []);
 
   if (loading || !user) {
-    return <p>wait a bit</p>;
+    return <p>Loading...</p>;
   }
+
+  const handlePostDeleteClick = async (post: any) => {
+    // Delete the article
+    const postRef = ref(storage, `${post.name}`);
+    await deleteObject(postRef);
+
+    // Delete the image
+    const imageRef = ref(
+      storage,
+      `images/${post.metadata.customMetadata?.imageID}.png`,
+    );
+    await deleteObject(imageRef);
+  };
+
+  const handleGalleryDeleteClick = async (image: any) => {
+    const imageRef = ref(storage, `gallery/${image.name}`);
+    await deleteObject(imageRef);
+  };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -100,61 +178,279 @@ export default function Page() {
     }
   };
 
-  const handleUploadClick = async () => {
+  const onSubmit: SubmitHandler<IFormValues> = async (data) => {
     if (!file) {
       return;
     }
 
-    const newRef = ref(storage, `${postNames?.length}.md`);
+    console.log(!!postNames && postNames[postNames.length - 1]);
+
+    const newRef = ref(
+      storage,
+      `${
+        postNames
+          ? String(
+              Number(postNames[postNames.length - 1].name.split('.')[0]) + 1,
+            )
+          : ''
+      }.md`,
+    );
     const textMetadata = {
       contentType: 'text/plain',
       customMetadata: {
-        title: 'Vila Diana din Poiana Brasov',
+        title: data.title,
         imageID: `${imageNames?.length}`,
       },
     };
-    await uploadString(newRef, text, 'raw', textMetadata).then(
-      (snapshot) => {
-        console.log('Uploaded a blob or file!');
-      },
-    );
+    await uploadString(newRef, data.body, 'raw', textMetadata).then(() => {
+      console.log('Uploaded a blob or file!');
+    });
 
     const imagesRef = ref(storage, 'images');
-    const newImageRef = ref(imagesRef, `${imageNames?.length}.png`);
+    const newImageRef = ref(
+      imagesRef,
+      `${
+        imageNames
+          ? String(
+              Number(imageNames[imageNames.length - 1].name.split('.')[0]) + 1,
+            )
+          : ''
+      }.png`,
+    );
     const metadata = {
       contentType: 'image/png',
     };
-    await uploadBytes(newImageRef, file, metadata).then((snapshot) => {
+    await uploadBytes(newImageRef, file, metadata).then(() => {
+      console.log('Uploaded a blob or file!');
+    });
+
+    toast('Postarea a fost adăugată!', {
+      action: {
+        label: 'Refresh',
+        onClick: () => {
+          window.location.reload();
+        },
+      },
+    });
+  };
+
+  const onGallerySubmit = async () => {
+    if (!galleryFile) {
+      return;
+    }
+
+    const imagesRef = ref(storage, 'gallery');
+    const newImageRef = ref(imagesRef, `${galleryFile.name}.png`);
+    const metadata = {
+      contentType: 'image/png',
+    };
+    await uploadBytes(newImageRef, galleryFile, metadata).then(() => {
       console.log('Uploaded a blob or file!');
     });
   };
 
   return (
     <>
-      <h1 className={`ml-8 mt-5 text-5xl font-semibold ${poppins.className}`}>
-        Admin
-      </h1>
-      <div>
-        <p>admin page</p>
-        <p>{JSON.stringify(postNames)}</p>
-        <br />
-        <p>{JSON.stringify(imageNames)}</p>
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            await handleUploadClick();
+      <div className='flex'>
+        <h1 className={`ml-8 mt-5 text-5xl font-semibold ${poppins.className}`}>
+          Admin
+        </h1>
+        <Button
+          className='ml-auto mr-8 mt-5'
+          onClick={async () => {
+            await firebaseAuth.signOut();
+            router.replace('/admin/login');
           }}
         >
-          <input
+          Logout
+        </Button>
+      </div>
+      <div className='px-8 pb-20'>
+        <h2 className='mb-4 mt-8 text-4xl font-bold'>Blog</h2>
+        <h2 className='mb-4 mt-8 text-2xl font-bold'>Postări</h2>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Post ID</TableHead>
+              <TableHead>Post Name</TableHead>
+              <TableHead>Created At</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {postNames?.map((post) => (
+              <TableRow key={post.name}>
+                <TableCell>{post.name.split('.')[0]}</TableCell>
+                <TableCell>{post.metadata.customMetadata?.title}</TableCell>
+                <TableCell>
+                  {formattedDate(post.metadata.timeCreated)}
+                </TableCell>
+                <TableCell>
+                  <Button
+                    onClick={() =>
+                      handlePostDeleteClick(post).then(() => {
+                        toast('Postarea a fost ștearsă!', {
+                          action: {
+                            label: 'Refresh',
+                            onClick: () => {
+                              window.location.reload();
+                            },
+                          },
+                        });
+                      })
+                    }
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <h2 className='mb-4 mt-32 text-2xl font-bold'>
+          Creează o postare nouă
+        </h2>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Titlul postării</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder='Titlu' />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+              name='title'
+            />
+            <FormField
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Conținutul postării</FormLabel>
+                    <FormControl>
+                      <Textarea {...field} placeholder='Continut' />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+              name='body'
+            />
+            <FormField
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Imaginea postării</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type='file'
+                        onChange={(event) => {
+                          setFile(
+                            event.target.files
+                              ? event.target.files[0]
+                              : undefined,
+                          );
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+              name='file'
+            />
+            <Button type='submit' className='mt-3'>
+              Upload
+            </Button>
+          </form>
+        </Form>
+
+        <h2 className='mb-4 mt-16 text-4xl font-bold'>Galerie</h2>
+        <h2 className='mb-4 mt-8 text-2xl font-bold'>Imagini</h2>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Image</TableHead>
+              <TableHead>Image Name</TableHead>
+              <TableHead>Created At</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {galleryPhotos?.map((image) => (
+              <TableRow key={image.name}>
+                <TableCell>
+                  <img
+                    src={image.src}
+                    alt={image.name}
+                    className='h-20 w-20 object-cover'
+                  />
+                </TableCell>
+                <TableCell>{image.name.split('.')[0]}</TableCell>
+                <TableCell>
+                  {formattedDate(image.metadata.timeCreated)}
+                </TableCell>
+                <TableCell>
+                  <Button
+                    onClick={() =>
+                      handleGalleryDeleteClick(image).then(() => {
+                        toast('Imaginea a fost ștearsă!', {
+                          action: {
+                            label: 'Refresh',
+                            onClick: () => {
+                              window.location.reload();
+                            },
+                          },
+                        });
+                      })
+                    }
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <h2 className='mb-4 mt-32 text-2xl font-bold'>
+          Încarcă o imagine nouă
+        </h2>
+        <form
+          onSubmit={async (event) => {
+            event.preventDefault();
+            await onGallerySubmit().then(() => {
+              toast('Imaginea a fost adăugata!', {
+                action: {
+                  label: 'Refresh',
+                  onClick: () => {
+                    window.location.reload();
+                  },
+                },
+              });
+            });
+          }}
+        >
+          <Input
             type='file'
-            id='img'
-            name='img'
-            accept='image/*'
-            onChange={handleFileChange}
+            onChange={(event) => {
+              setGalleryFile(
+                event.target.files ? event.target.files[0] : undefined,
+              );
+            }}
           />
-          <button type='submit'>upload</button>
+          <Button type='submit' className='mt-3'>
+            Upload
+          </Button>
         </form>
       </div>
+      <Toaster />
     </>
   );
 }
