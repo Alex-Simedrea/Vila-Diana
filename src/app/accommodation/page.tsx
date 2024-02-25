@@ -44,8 +44,9 @@ export default async function Accommodation() {
             description='Lorem ipsum dolor sit amet consectetur. Orci maecenas ut mauris massa blandit leo enim pellentesque pellentesque.'
             imagesSrc={apartament ? apartament : []}
             surface={55}
-            people={2}
-            bed='1 pat dublu'
+            adultPeople={2}
+            childPeople={1}
+            bed='1 pat dublu matrimonial'
             rooms={['203']}
           />
           <RoomCard
@@ -53,8 +54,9 @@ export default async function Accommodation() {
             description=''
             imagesSrc={dubla1 ? dubla1 : []}
             surface={23}
-            people={2}
-            bed='1 pat dublu'
+            adultPeople={2}
+            childPeople={1}
+            bed='1 pat dublu matrimonial'
             rooms={['101', '201', '301']}
           />
           <RoomCard
@@ -62,8 +64,9 @@ export default async function Accommodation() {
             description=''
             imagesSrc={dubla2 ? dubla2 : []}
             surface={23}
-            people={2}
-            bed='1 pat dublu'
+            adultPeople={2}
+            childPeople={1}
+            bed='1 pat dublu matrimonial'
             rooms={['102', '302']}
           />
           <RoomCard
@@ -71,8 +74,9 @@ export default async function Accommodation() {
             description=''
             imagesSrc={dubla3 ? dubla3 : []}
             surface={23}
-            people={2}
-            bed='1 pat dublu'
+            adultPeople={2}
+            childPeople={0}
+            bed='1 pat dublu matrimonial'
             rooms={['103']}
           />
           <RoomCard
@@ -80,8 +84,9 @@ export default async function Accommodation() {
             description=''
             imagesSrc={dubla4 ? dubla4 : []}
             surface={23}
-            people={2}
-            bed='1 pat dublu'
+            adultPeople={2}
+            childPeople={1}
+            bed='1 pat dublu matrimonial'
             rooms={['303']}
           />
           <RoomCard
@@ -89,8 +94,9 @@ export default async function Accommodation() {
             description=''
             imagesSrc={dubla5 ? dubla5 : []}
             surface={23}
-            people={2}
-            bed='1 pat dublu'
+            adultPeople={2}
+            childPeople={1}
+            bed='1 pat dublu matrimonial'
             rooms={['304']}
           />
         </div>

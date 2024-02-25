@@ -13,7 +13,8 @@ interface RoomCardProps {
   description: string;
   imagesSrc: string[];
   surface: number;
-  people: number;
+  adultPeople: number;
+  childPeople: number;
   bed: string;
   rooms: string[];
 }
@@ -23,7 +24,8 @@ export default function RoomCard({
   description,
   imagesSrc,
   surface,
-  people,
+  adultPeople,
+  childPeople,
   bed,
   rooms,
 }: RoomCardProps) {
@@ -53,7 +55,16 @@ export default function RoomCard({
         </div>
         <div className='flex flex-wrap gap-2'>
           <Chip label={`${surface} mp`} icon='arrows-maximize' />
-          <Chip label={people.toString()} icon='person' />
+          <div className='flex items-center justify-center gap-2 rounded-full bg-secondary-50 px-5 py-2 lg:gap-3 lg:px-6 lg:py-4'>
+            <i className={`fa fa-person fa-solid text-xl lg:text-2xl`}></i>
+            <span className='text-medium font-medium lg:text-lg'>{`${adultPeople}`}</span>
+            {childPeople > 0 && (
+              <>
+                <i className={`fa fa-person fa-solid text-xl lg:text-lg`}></i>
+                <span className='text-medium font-medium lg:text-lg'>{`${childPeople}`}</span>
+              </>
+            )}
+          </div>
           <Chip label={bed} icon='bed' />
           <Chip label={rooms.join(', ')} icon='key' />
         </div>
