@@ -29,6 +29,7 @@ export default function Footer() {
           <a href='/legal/rules' className='text-center'>Regulament ordine interioara si spatii de uz comun</a>
           <a href='/legal/cookies'>Politica de cookies</a>
           <a href='/legal/gdpr'>Politica de confidentialitate GDPR</a>
+          <a href='/legal/accomodation'>Politici de cazare</a>
           <a href='https://anpc.ro/' target='_blank'>ANPC</a>
         </div>
       </div>

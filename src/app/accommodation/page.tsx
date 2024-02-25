@@ -22,7 +22,7 @@ export default async function Accommodation() {
         >
           Cazare
         </h1>
-        <p className='text-lg w-2/3'>
+        <p className='text-lg w-full'>
           Menită să asigure o cazare plăcută, caldă, cu confortul atât de
           necesar unei vacanţe reuşite, Vila Diana a fost proiectată şi
           construită având în prim plan necesităţile şi dorinţele oaspeţilor

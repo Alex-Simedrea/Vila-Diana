@@ -22,6 +22,11 @@ export default function Contact() {
             </span>
             în Poiana Brașov.
           </h1>
+          <p className='pt-2 text-lg'>
+            Ne așteptăm ca după o zi plină în care ați explorat frumusețile din
+            Poiana Brașov, să fiți bucuroși să vă retrageți într-un loc unde să
+            beneficiați de confort și de o atmosferă primitoare: Vila Diana.
+          </p>
           <section className='flex pt-8 max-md:flex-col'>
             <div className='flex w-1/2 flex-col justify-between pr-7 max-md:w-full max-md:px-0'>
               <div className='flex flex-col gap-4 max-md:w-full max-md:gap-2'>
