@@ -44,16 +44,16 @@ export default function Landing() {
           </Button>
         </div>
         <p className='text-xl font-medium max-xl:text-lg max-lg:text-medium max-md:hidden'>
-          Vila Diana ofera servicii de cazare in Poiana Brasov. Vila a intrat in
-          circuitul turistic in vara lui 2003 si a fost renovata complet in anul
-          2016, fiind clasificata de Ministerul Turismului cu conditii de cazare
-          de 4 stele. Vila Diana este situata la intrarea in statiunea Poiana
-          Brasov.
+          O vacanţă memorabilă nu este dată de cazare, dar acolo începe şi tot
+          acolo, la plecare, realizezi că urmează revenirea la cotidian. Iar
+          plăcerea revenirii în intimitatea camerei sau apartamentului tău,
+          alături de cei dragi, este exact ceea ce trebuie pentru a uni cât mai
+          plăcut zilele de vacanţă ale unui sejur!
         </p>
         <div className='flex pb-12 pt-5 max-md:hidden'>
           <div className='align-center flex w-1/3 flex-col justify-center border-r border-r-black pr-6 text-center'>
             <h3 className='mb-2 self-center text-4xl font-bold max-xl:text-3xl max-lg:text-xl'>
-              7
+              11
             </h3>
             <p className='self-center text-lg font-medium leading-tight max-xl:text-medium max-lg:text-sm'>
               camere de cazare
@@ -69,7 +69,7 @@ export default function Landing() {
           </div>
           <div className='align-center flex w-1/3 flex-col justify-center pl-6 text-center'>
             <h3 className='mb-2 self-center text-4xl font-bold max-xl:text-3xl max-lg:text-xl'>
-              900m
+              850m
             </h3>
             <p className='self-center text-lg font-medium leading-tight max-xl:text-medium max-lg:text-sm'>
               distanta pana la partia Bradul

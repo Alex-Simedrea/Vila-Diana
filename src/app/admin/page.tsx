@@ -38,7 +38,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast, Toaster } from 'sonner';
-import { revalidatePath } from 'next/cache';
 import revalidate from '@/lib/revalidateCache';
 
 function formattedDate(date: string) {
@@ -192,7 +191,11 @@ export default function Page() {
       `${
         postNames
           ? String(
-              Number(postNames[postNames.length - 1].name.split('.')[0]) + 1,
+              Number(
+                postNames.length
+                  ? postNames[postNames.length - 1].name.split('.')[0]
+                  : -1,
+              ) + 1,
             )
           : ''
       }.md`,
@@ -215,7 +218,11 @@ export default function Page() {
       `${
         imageNames
           ? String(
-              Number(imageNames[imageNames.length - 1].name.split('.')[0]) + 1,
+              Number(
+                imageNames.length
+                  ? imageNames[imageNames.length - 1].name.split('.')[0]
+                  : -1,
+              ) + 1,
             )
           : ''
       }.png`,

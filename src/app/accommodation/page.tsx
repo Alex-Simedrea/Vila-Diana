@@ -22,6 +22,22 @@ export default async function Accommodation() {
         >
           Cazare
         </h1>
+        <p className='text-lg w-2/3'>
+          Menită să asigure o cazare plăcută, caldă, cu confortul atât de
+          necesar unei vacanţe reuşite, Vila Diana a fost proiectată şi
+          construită având în prim plan necesităţile şi dorinţele oaspeţilor
+          săi. Cu o arhitectură clasică zonei montane, cu unghiuri ascuţite şi
+          pante abrupte, pentru a preveni acumularea de zăpadă iarna, Vila Diana
+          te va cuceri de la prima vedere. Iar acest lucru este o provocare
+          plăcută pentru noi şi o continuă motivaţie. Atmosfera plăcută,
+          curăţenia impecabilă, senzaţia familiară a așternuturilor de pat mereu
+          proaspete şi îmbietoare, spaţiile generoase ale camerelor te vor face
+          să simţi că ai găsit locul pe care ţi-l doreşti pentru a petrece
+          nopţile unui sejur la munte.
+        </p>
+        <p className='text-lg pb-8'>
+          Te aşteptăm cu drag să scriem împreună povestea unei vacanţe de vis!
+        </p>
         <div className='flex flex-col gap-8 pb-10'>
           <RoomCard
             name='Apartament blue moon'

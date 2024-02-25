@@ -11,15 +11,15 @@ export default function Details() {
             <Image
               src={'/home_section2/1.png'}
               alt='1'
-              width={75}
-              height={75}
+              width={100}
+              height={100}
               className='mt-5 rounded-full max-md:hidden'
             />
             <Image
               src={'/home_section2/2.png'}
               alt='2'
-              width={75}
-              height={75}
+              width={100}
+              height={100}
               className='ml-32 mt-5 rounded-full max-md:hidden'
             />
           </div>
@@ -40,7 +40,7 @@ export default function Details() {
                 target='_blank'
                 size='lg'
                 radius='full'
-                className='md:mr-4 bg-primary-800 px-10 text-white max-md:w-full'
+                className='bg-primary-800 px-10 text-white max-md:w-full md:mr-4'
               >
                 Rezerva acum
                 <i className='fa-regular fa-arrow-up-right'></i>
@@ -60,28 +60,29 @@ export default function Details() {
             <Image
               src={'/home_section2/3.png'}
               alt='3'
-              width={75}
-              height={75}
+              width={100}
+              height={100}
               className='ml-32 mt-5 rounded-full max-md:hidden'
             />
             <Image
               src={'/home_section2/4.png'}
               alt='4'
-              width={75}
-              height={75}
+              width={100}
+              height={100}
               className='mt-5 rounded-full max-md:hidden'
             />
           </div>
         </div>
         <p className='mt-16 w-1/2 text-center max-md:mt-8 max-md:w-4/5'>
-          Lorem ipsum dolor sit amet consectetur. Quisque mollis pharetra et
-          aliquam laoreet. Diam urna lacinia ullamcorper ultrices diam
-          pellentesque in. Feugiat egestas sit elementum ultricies hac enim.
-          Aliquet tincidunt tristique tortor lorem faucibus ornare praesent
-          curabitur. Gravida volutpat velit bibendum turpis non aliquam
-          sagittis. Et vulputate velit tincidunt mi. Sed arcu et purus dis massa
-          ornare tempus ut. Ultrices habitant consectetur augue tellus eleifend
-          in ligula massa. Nisi facilisis consequat orci odio euismod at magna.
+          Situată la intrarea în Poiana Braşov, Vila Diana te întâmpină mereu cu
+          bucurie, fiindu-ţi căminul de la munte, din care poţi explora
+          împrejurimile. Fie că pleci într-o plimbare prin staţiune, fie într-o
+          drumeţie prin frumoşii munţi ce te înconjoară, aerul tare, puternic
+          ozonat, îţi va da energie şi bună dispoziţie. Iar seara vei avea un
+          motiv în plus să savurezi mâncărurile şi băuturile de la
+          restaurantele, terasele sau cabanele din zonă. Tradiţionale sau
+          moderne, acestea te vor remonta si pregăti pentru o nouă zi de vis a
+          vacanţei tale.
         </p>
         <div className='mt-16 flex w-1/2 items-center justify-center'>
           <div className='mr-5 h-0.5 w-full bg-background-300' />
