@@ -6,21 +6,21 @@ export default function Details() {
   return (
     <section className='mb-24 mt-10 px-[16px] max-md:mb-12'>
       <div className='flex h-full w-full flex-col items-center justify-center rounded-3xl bg-secondary-100 py-24 max-md:py-12'>
-        <div className='flex w-3/4 justify-center'>
+        <div className='flex w-[90%] xl:w-3/4 justify-center'>
           <div>
             <Image
               src={'/home_section2/1.png'}
               alt='1'
               width={100}
               height={100}
-              className='mt-5 rounded-full max-md:hidden'
+              className='mt-5 rounded-full max-lg:hidden'
             />
             <Image
               src={'/home_section2/2.png'}
               alt='2'
               width={100}
               height={100}
-              className='ml-32 mt-5 rounded-full max-md:hidden'
+              className='ml-32 mt-5 rounded-full max-lg:hidden'
             />
           </div>
           <div>
@@ -62,14 +62,14 @@ export default function Details() {
               alt='3'
               width={100}
               height={100}
-              className='ml-32 mt-5 rounded-full max-md:hidden'
+              className='ml-32 mt-5 rounded-full max-lg:hidden'
             />
             <Image
               src={'/home_section2/4.png'}
               alt='4'
               width={100}
               height={100}
-              className='mt-5 rounded-full max-md:hidden'
+              className='mt-5 rounded-full max-lg:hidden'
             />
           </div>
         </div>
