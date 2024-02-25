@@ -108,6 +108,15 @@ export default function Landing() {
                 />
               </div>
             </CarouselItem>
+            <CarouselItem>
+              <div className='flex h-full w-full items-center justify-center'>
+                <img
+                  src='/carousel/4.png'
+                  alt='carousel4'
+                  className='!h-full w-full self-start overflow-hidden rounded-large object-cover max-md:rounded-3xl'
+                />
+              </div>
+            </CarouselItem>
           </CarouselContent>
         </Carousel>
 
