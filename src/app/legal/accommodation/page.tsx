@@ -1,7 +1,7 @@
 import { poppins } from '@/app/fonts';
 import Footer from '@/components/Footer';
 
-export default function Accomodation() {
+export default function Accommodation() {
   return (
     <div className='flex min-h-[calc(100dvh-4rem)] flex-col'>
       <main className='mb-20 flex-1 px-[16px] pt-6 md:px-10 md:pt-10'>
@@ -13,7 +13,7 @@ export default function Accomodation() {
         <p>Politici cazare:</p>
         <ul className='list-disc px-8'>
           <li>
-            Orele de check-in sunt cuprinse in intervalul 14:00-18:00. In cazul
+            Orele de check-in sunt cuprinse in intervalul 15:00-18:00. In cazul
             in care turistul soseste mai tarziu de ora 18:00 este posibil
             check-in-ul dar este obligatorie informarea receptiei de sosirea
             tarzie, in caz contrar rezervarea poate fi anulata;
@@ -23,7 +23,7 @@ export default function Accomodation() {
             conform normelor legale in vigoare;
           </li>
           <li>Ora de check-out este 11:00 a.m.;</li>
-          <li>Orele de liniste sunt cuprinse in intervalul 22:00-8:30;</li>
+          <li>Orele de liniste sunt cuprinse in intervalul 21:30-8:30;</li>
           <li>Nu sunt permise animalele de companie;</li>
           <li>
             Nu sunt permise petrecerile cu exceptia cazului in care este

@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin/login/
+
+Sitemap: https://vila-diana.com/sitemap.xml
